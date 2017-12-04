@@ -41,6 +41,7 @@ static const unsigned char settingsIcon[] = {
 static void searchMenuHandler();
 static void bandScannerMenuHandler();
 static void settingsMenuHandler();
+static void receiverMenuHandler();
 
 
 void StateMachine::MenuStateHandler::onEnter() {
@@ -48,6 +49,7 @@ void StateMachine::MenuStateHandler::onEnter() {
     this->menu.addItem("Search", searchIcon, searchMenuHandler);
     this->menu.addItem("Band Scan", bandScanIcon, bandScannerMenuHandler);
     this->menu.addItem("Settings", settingsIcon, settingsMenuHandler);
+    this->menu.addItem("Receiver", settingsIcon, receiverMenuHandler);
 }
 
 
@@ -86,4 +88,8 @@ static void bandScannerMenuHandler() {
 
 static void settingsMenuHandler() {
     StateMachine::switchState(StateMachine::State::SETTINGS);
+};
+
+static void receiverMenuHandler() {
+    StateMachine::switchState(StateMachine::State::RECEIVER);
 };

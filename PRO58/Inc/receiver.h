@@ -30,7 +30,7 @@ namespace Receiver {
 
     extern ReceiverId activeReceiver;
     extern uint8_t activeChannel;
-
+    extern uint8_t sensor_read;
     extern uint8_t rssiA;
     extern uint16_t rssiARaw;
     extern uint8_t rssiALast[RECEIVER_LAST_DATA_SIZE];

@@ -5,6 +5,7 @@
 #include "state_screensaver.h"
 #include "state_search.h"
 #include "state_bandscan.h"
+#include "state_receiver.h"
 #include "state_menu.h"
 #include "state_settings.h"
 #include "state_settings_rssi.h"
@@ -30,11 +31,12 @@ void *operator new(size_t size, void *ptr){
     MAX(sizeof(SearchStateHandler), \
     MAX(sizeof(BandScanStateHandler), \
     MAX(sizeof(MenuStateHandler), \
+    	MAX(sizeof(ReceiverStateHandler), \
     MAX(sizeof(SettingsStateHandler), \
 	MAX(sizeof(SettingsRssiStateHandler), \
 	MAX(sizeof(SettingsCallsignStateHandler), \
 	sizeof(SettingsDiversityModeStateHandler) \
-	)))))))
+	))))))))
 ;
 
 namespace StateMachine {
@@ -102,6 +104,7 @@ namespace StateMachine {
             STATE_FACTORY(State::SEARCH, SearchStateHandler);
             STATE_FACTORY(State::SCREENSAVER, ScreensaverStateHandler);
             STATE_FACTORY(State::BANDSCAN, BandScanStateHandler);
+            STATE_FACTORY(State::RECEIVER, ReceiverStateHandler);
             STATE_FACTORY(State::MENU, MenuStateHandler);
             STATE_FACTORY(State::SETTINGS, SettingsStateHandler);
             STATE_FACTORY(State::SETTINGS_RSSI, SettingsRssiStateHandler);

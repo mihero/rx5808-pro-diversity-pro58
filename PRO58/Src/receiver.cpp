@@ -24,7 +24,7 @@ namespace Receiver {
 
     ReceiverId activeReceiver = ReceiverId::A;
     uint8_t activeChannel = 0;
-
+    uint8_t sensor_read = 0;
     uint8_t rssiA = 0;
     uint16_t rssiARaw = 0;
     uint8_t rssiALast[RECEIVER_LAST_DATA_SIZE] = { 0 };
@@ -69,6 +69,7 @@ namespace Receiver {
     }
 
     void updateRssi() {
+        sensor_read = 0;
         rssiARaw = rssiDMARaw[0];
         rssiRawA[0] = rssiARaw;
         #ifdef USE_DIVERSITY
@@ -86,7 +87,7 @@ namespace Receiver {
             ),
             0,
             100
-        );
+        ) & 0xFF;
         #ifdef USE_DIVERSITY
             rssiB = constrain(
                 map(
@@ -98,7 +99,7 @@ namespace Receiver {
                 ),
                 0,
                 100
-            );
+            ) & 0xFF;
         #endif
 
         if(rssiA == 100 || rssiB == 100){
@@ -106,7 +107,7 @@ namespace Receiver {
         }
 
         if (rssiLogTimer.hasTicked()) {
-            for (uint8_t i = 0; i < RECEIVER_LAST_DATA_SIZE - 1; i++) {
+        		for (uint8_t i = 0; i < RECEIVER_LAST_DATA_SIZE - 1; i++) {
                 rssiALast[i] = rssiALast[i + 1];
                 #ifdef USE_DIVERSITY
                     rssiBLast[i] = rssiBLast[i + 1];
